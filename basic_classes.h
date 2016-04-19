@@ -22,6 +22,8 @@ class Oracul {
     std::size_t n, m;
     std::vector <int> secret_string;
  public:
+    std::size_t get_n();
+    std::size_t get_m();
     virtual Response query(const std::vector <int> &query_string) = 0;
 };
 

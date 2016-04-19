@@ -12,7 +12,7 @@ static bool BruteForce(Player *player, int n, int m, int ln,
         if (!used[i]) {
             used[i] = true;
             lst[ln] = i;
-            if (BruteForce(player, n, m, ln + 1, score, used, lst)) {
+            if (BruteForce(player, n, m, ln + 1, used, lst)) {
                 return true;
             }
             used[i] = false;
@@ -25,5 +25,5 @@ int BruteForceStrategy(Player *player, std::size_t n, std::size_t m)  {
     std::vector <bool> used(m, false);
     std::vector <int> lst(n);
     BruteForce(player, n, m, 0, used, lst);
-    return player.get_score();
+    return player->get_score();
 }

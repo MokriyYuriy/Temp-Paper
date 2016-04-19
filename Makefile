@@ -1,7 +1,16 @@
 CC=g++
-CFLAGS=--std=c++11 -c -Wall
+CFLAGS=--std=c++11 -g -c -Wall
 LDFLAGS=
-SOURCES=randomoracul.cpp oracul.cpp player.cpp response.cpp bruteforce.cpp test.cpp
+SOURCES = \
+		shiftstrategy.cpp\
+		dsu.cpp\
+		oracul.cpp\
+		randomoracul.cpp\
+		player.cpp\
+		response.cpp\
+		bruteforce.cpp\
+		test.cpp\
+		simpleplayer.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 

@@ -18,7 +18,7 @@ bool DSU::unite(int v, int u) {
     u = get(u);
     if (v == u) return false;
     if (rk[u] == rk[v]) rk[v]++;
-    if (rk[u] > rk[v]) swap(v, u);
+    if (rk[u] > rk[v]) std::swap(v, u);
     pr[u] = v;
     return false;
 }

@@ -18,7 +18,7 @@ Response SimplePlayer::query(const std::vector <int> &query_string) {
 #ifdef DEBUG
     std::cout << "\nbulls:" << result.get_bulls() << " bulls:" << result.get_cows() << '\n';
 #endif
-    if (result.get_bulls() == n) {
+    if (result.get_bulls() == 0/*(int)oracul->get_n()*/) {
         end = true;
     }
     score++;
