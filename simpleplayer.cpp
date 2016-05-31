@@ -1,8 +1,8 @@
 #include "player.h"
 #include <iostream>
 
-SimplePlayer::SimplePlayer(Oracul *_oracul) {
-    oracul = _oracul;
+SimplePlayer::SimplePlayer(Oracle *_oracle) {
+    oracle = _oracle;
     score = 0;
     end = false;
 }
@@ -14,11 +14,11 @@ Response SimplePlayer::query(const std::vector <int> &query_string) {
         std::cout << query_string[i] << ' ';
     }
 #endif
-    result = oracul->query(query_string);
+    result = oracle->query(query_string);
 #ifdef DEBUG
     std::cout << "\nbulls:" << result.get_bulls() << " bulls:" << result.get_cows() << '\n';
 #endif
-    if (result.get_bulls() == 0/*(int)oracul->get_n()*/) {
+    if (result.get_bulls() == (int)query_string.size()) {
         end = true;
     }
     score++;

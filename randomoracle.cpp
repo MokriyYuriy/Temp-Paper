@@ -1,7 +1,7 @@
-#include "oracul.h"
+#include "oracle.h"
 #include <unordered_map>
 
-RandomOracul::RandomOracul(std::size_t _n, std::size_t _m, int rand_seed) {
+RandomOracle::RandomOracle(std::size_t _n, std::size_t _m, int rand_seed) {
     n = _n, m = _m;
     my_rand = std::default_random_engine(rand_seed);
     for (size_t i = 0; i < m; i++) {
@@ -11,7 +11,7 @@ RandomOracul::RandomOracul(std::size_t _n, std::size_t _m, int rand_seed) {
     secret_string.resize(n);
 }
 
-Response RandomOracul::query(const std::vector <int> &query_string) {
+Response RandomOracle::query(const std::vector <int> &query_string) {
     std::unordered_map <int, std::size_t> map;
     int cows = 0, bulls = 0;
     for (std::size_t i = 0; i < query_string.size(); i++) {

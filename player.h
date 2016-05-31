@@ -5,7 +5,7 @@
 
 class SimplePlayer : public Player {
  public:
-    SimplePlayer(Oracul *); 
+    SimplePlayer(Oracle *); 
     Response query(const std::vector <int> &query_string);
 };
 

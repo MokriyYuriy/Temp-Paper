@@ -12,30 +12,30 @@ class Response {
  public:
     Response();
     Response(int cows, int bulls);
-    int get_cows();
-    int get_bulls();
-    int get_cows_and_bulls();
+    int get_cows() const;
+    int get_bulls() const;
+    int get_cows_and_bulls() const;
 };
 
-class Oracul {
+class Oracle {
  protected:
     std::size_t n, m;
     std::vector <int> secret_string;
  public:
-    std::size_t get_n();
-    std::size_t get_m();
+    std::size_t get_n() const;
+    std::size_t get_m() const;
     virtual Response query(const std::vector <int> &query_string) = 0;
 };
 
 class Player {
  protected:
-    Oracul *oracul;
+    Oracle *oracle;
     int score;
     bool end;
  public:
     virtual Response query(const std::vector <int> &query_string) = 0;
-    int get_score();
-    bool is_end();
+    int get_score() const;
+    bool is_end() const;
 };
 
 #endif

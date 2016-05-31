@@ -72,13 +72,13 @@ static std::vector <int> FindPermutation(Player *player, std::vector <int> strin
 
 static int BinSearchQuery(Player *player, const std::vector <int> &string, int left,
                           int right, std::size_t n, std::size_t m) {
-    std::vector <bool> used(min(n * 2, m), false);
+    std::vector <bool> used(std::min(n * 2, m), false);
     std::vector <int> query_string(n);
     std::size_t p = 0;
     for (std::size_t i = 0; i < n; i++) {
-        if (string[i] < used.size()) used[string[i]] = true;
+        if (string[i] < (int)used.size()) used[string[i]] = true;
     }
-    for (std::size_t i = 0; i < n; i++) {
+    for (int i = 0; i < (int)n; i++) {
         if (i >= left && i < right) {
             query_string[i] = string[i];
         } else {
@@ -93,7 +93,7 @@ static std::size_t BinSearch(Player *player, const std::vector <int> &string, in
                              int right, std::size_t n, std::size_t m, int cnt_bulls) {
     while (left + 1 < right) {
         int middle = (left + right) / 2;
-        if (BinSearchQuery(player) - cnt_bulls > 0) {
+        if (BinSearchQuery(player, string, 0, middle + 1, n, m) - cnt_bulls > 0) {
             right = middle;
         } else {
             left = middle;
@@ -107,7 +107,7 @@ static std::vector <int> BinSearchFindPermutation(Player *player, std::vector <i
     std::vector <int> answer(n);
     for (std::size_t i = 0; i < n; i++, std::rotate(string.begin(), string.begin() + 1, string.end())) {
         Response query = player->query(string);
-        if (query.get_bulls() == n) return string;
+        if (query.get_bulls() == (int)n) return string;
         int previous_bull = -1;
         for (int j = 0; j < query.get_bulls(); j++) {
             previous_bull = BinSearch(player, string, previous_bull, (int)n - 1, n, m, j);

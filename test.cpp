@@ -1,10 +1,10 @@
 #include "player.h"
-#include "oracul.h"
+#include "oracle.h"
 #include "strategy.h"
 #include "test.h"
 #include <iostream>
 
-static const int TEST = 100, MAXN = 200, MAXM = 250;
+static const int TEST = 1000, MAXN = 7, MAXM = 12;
 
 Result::Result() {}
 
@@ -15,11 +15,15 @@ std::vector <Result> TestStrategy(int (*strategy)(Player *, size_t, size_t)) {
     for (int test = 0; test < TEST; test++) {
         std::default_random_engine random(test * 31 + 79);
         int n = random() % MAXN + 1, m = random() % (MAXM - n) + n, seed = 42 * test * test + test * 179 + 57, score;
-        RandomOracul oracul(n, m, seed);
-        SimplePlayer player(&oracul);
+        RandomOracle oracle(n, m, seed);
+        SimplePlayer player(&oracle);
         score = strategy(&player, n, m);
+        if (!player.is_end()) {
+            std::cerr << "The game wasn't finished\n";
+            exit(0);
+        }
         result.push_back(Result(n, m, score));
-        std::cout << player.is_end() << std::endl; 
+        std::cout << n << ' ' << m << ' ' << player.is_end() << std::endl; 
     }
     return result;
 }
@@ -29,7 +33,7 @@ int main() {
     for (int i = 0; i < TEST; i++) {
         std::cout << result[i].n << ' ' << result[i].m << ' ' << result[i].score << std::endl;  
     } //*/
-    std::vector <Result> result = TestStrategy(SimpleShiftStrategy);
+    std::vector <Result> result = TestStrategy(ChoosePossibleStrategy);
     for (int i = 0; i < TEST; i++) {
         std::cout << result[i].n << ' ' << result[i].m << ' ' << result[i].score << std::endl;  
     }
