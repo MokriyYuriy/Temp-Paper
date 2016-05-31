@@ -2,14 +2,6 @@
 #include "simpletools.h"
 #include <iostream>
 
-static bool check_is_first(const std::vector <int> &string) {
-    for (int i = 0; i < (int)string.size(); i++) {
-        if (i != string[i]) {
-            return true;
-        }
-    }
-    return false;
-}
 
 int ChoosePossibleStrategy(Player *player, std::size_t n, std::size_t m) {
     static int test = 1;
@@ -33,6 +25,6 @@ int ChoosePossibleStrategy(Player *player, std::size_t n, std::size_t m) {
         //print_string(string);
         string = next_string(string, n, m);
     } while(true);
-    std::cout << test++ << '\n' ;
+//    std::cout << test++ << '\n' ;
     return score;
 }

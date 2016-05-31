@@ -77,3 +77,41 @@ void print_string(const std::vector <int> &string) {
     }
     std::cout << '\n';
 }
+
+bool check_is_first(const std::vector <int> &string) {
+    for (int i = 0; i < (int)string.size(); i++) {
+        if (i != string[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+std::vector <int> get_N(const std::vector <int> &query_string,
+                        std::vector <std::pair <std::vector <int>, Response>> T,
+                        std::size_t n, std::size_t m) {
+    std::vector <std::vector <int>> possible_strings;
+    std::vector <int> string(n);
+    std::vector <int> N;
+    for (std::size_t i = 0; i < n; i++) {
+        string[i] = i;
+    }
+    do {
+        if (queries_satisfaction(string, T, n, m)) {
+            possible_strings.push_back(string);
+        }
+        string = next_string(string, n, m);
+    } while(check_is_first(string));
+    for (std::size_t i = 0; i < n; i++) {
+        for (std::size_t j = 0; i + j < n; j++) {
+            N.push_back(0);
+            std::pair <std::vector <int>, Response> query = {query_string, Response(i, j)}; 
+            for (std::size_t z = 0; z < possible_strings.size(); z++) {
+                if (query_satisfaction(possible_strings[z], query, n, m)) {
+                    N.back()++;
+                }
+            }
+        }
+    }
+    return N;
+}

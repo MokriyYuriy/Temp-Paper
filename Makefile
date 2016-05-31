@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=--std=c++14 -g -c -Wall
+CFLAGS=--std=c++14 -O2 -c -Wall
 LDFLAGS=
 SOURCES = \
 		shiftstrategy.cpp\
@@ -8,11 +8,14 @@ SOURCES = \
 		randomoracle.cpp\
 		player.cpp\
 		response.cpp\
-		choosepossible.cpp\
 		bruteforce.cpp\
 		test.cpp\
 		simpleplayer.cpp\
-		simpletools.cpp
+		larmouth.cpp\
+		equivalence.cpp\
+		simpletools.cpp\
+		crushstrategy.cpp\
+		choosepossible.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 

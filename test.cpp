@@ -4,7 +4,7 @@
 #include "test.h"
 #include <iostream>
 
-static const int TEST = 1000, MAXN = 7, MAXM = 12;
+static const int TEST = 30, MAXN = 4, MAXM = 10;
 
 Result::Result() {}
 
@@ -14,7 +14,8 @@ std::vector <Result> TestStrategy(int (*strategy)(Player *, size_t, size_t)) {
     std::vector <Result> result;
     for (int test = 0; test < TEST; test++) {
         std::default_random_engine random(test * 31 + 79);
-        int n = random() % MAXN + 1, m = random() % (MAXM - n) + n, seed = 42 * test * test + test * 179 + 57, score;
+        random();
+        int n = random() % MAXN + 1, m = random() % (MAXM + 1 - n) + n, seed = 42 * test * test + test * 179 + 57, score;
         RandomOracle oracle(n, m, seed);
         SimplePlayer player(&oracle);
         score = strategy(&player, n, m);
@@ -23,7 +24,7 @@ std::vector <Result> TestStrategy(int (*strategy)(Player *, size_t, size_t)) {
             exit(0);
         }
         result.push_back(Result(n, m, score));
-        std::cout << n << ' ' << m << ' ' << player.is_end() << std::endl; 
+        std::cout << test << ' ' << n << ' ' << m << ' ' << score << ' ' << player.is_end() << std::endl; 
     }
     return result;
 }
@@ -33,7 +34,8 @@ int main() {
     for (int i = 0; i < TEST; i++) {
         std::cout << result[i].n << ' ' << result[i].m << ' ' << result[i].score << std::endl;  
     } //*/
-    std::vector <Result> result = TestStrategy(ChoosePossibleStrategy);
+    std::vector <Result> result = TestStrategy(CrushStrategy);
+    std::cout << TEST << ' ' << MAXN << ' ' << MAXM;
     for (int i = 0; i < TEST; i++) {
         std::cout << result[i].n << ' ' << result[i].m << ' ' << result[i].score << std::endl;  
     }

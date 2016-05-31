@@ -7,5 +7,7 @@ int BruteForceStrategy(Player *player, std::size_t n, std::size_t m);
 int SimpleShiftStrategy(Player *player, std::size_t n, std::size_t m);
 int AdvancedShiftStrategy(Player *player, std::size_t n, std::size_t m);
 int ChoosePossibleStrategy(Player *player, std::size_t n, std::size_t m);
+int LarmouthStrategy(Player *player, std::size_t n, std::size_t m);
+int CrushStrategy(Player *player, std::size_t n, std::size_t m);
 
 #endif
