@@ -1,3 +1,5 @@
 *.o
-main
+main*
 Tex/
+log*
+tests/

@@ -21,4 +21,16 @@ std::vector <int> get_N(const std::vector <int> &string,
                         std::vector <std::pair <std::vector <int>, Response>> T,
                         std::size_t n, std::size_t m); 
 
+std::vector <int> initial_string(std::size_t n);
+
+std::vector <std::vector <std::vector <int>>> get_new_S(const std::vector <int> &query_string,
+                        const std::vector <std::vector <int>> &S,
+                        std::vector <std::pair <std::vector <int>, Response>> T,
+                        std::size_t n, std::size_t m);
+
+
+std::vector <std::vector <int>> initial_S(std::size_t n, std::size_t m);
+
+int A(int n, int m);
+
 #endif

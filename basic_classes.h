@@ -6,6 +6,8 @@
 #ifndef BASIC_CLASSES_H
 #define BASIC_CLASSES_H
 
+const int INF = (int)1e8;
+
 class Response {
  private:
     int cows, bulls;

@@ -1,4 +1,5 @@
 #include "strategy.h"
+//#include "simpletools.h"
 
 static std::vector <int> FindAllCows(Player *player, std::size_t n, std::size_t m) {
     std::vector <int> first_set, second_set;
@@ -42,7 +43,7 @@ static std::vector <int> FindPermutation(Player *player, std::vector <int> strin
     std::vector <int> answer(n);
     if (n == 1) return string;
     for (std::size_t i = 0; i < n; i++, std::rotate(string.begin(), string.begin() + 1, string.end())) {
-        bool is_first_answer;
+        bool is_first_answer = true;
         std::vector <int> first_set, second_set, bulls;
         Response zero_query = player->query(string);
         if (zero_query.get_bulls() == 0) continue;
@@ -126,7 +127,7 @@ int SimpleShiftStrategy(Player *player, std::size_t n, std::size_t m) {
 
 int AdvancedShiftStrategy(Player *player, std::size_t n, std::size_t m) {
     std::vector <int> string = FindAllCows(player, n, m);
-    if (n * 2 >= m) {
+    if (n * 2 <= m) {
         string = BinSearchFindPermutation(player, string, n, m);
     } else {
         string = FindPermutation(player, string, n, m);

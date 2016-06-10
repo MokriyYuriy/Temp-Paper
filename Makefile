@@ -15,7 +15,9 @@ SOURCES = \
 		equivalence.cpp\
 		simpletools.cpp\
 		crushstrategy.cpp\
-		choosepossible.cpp
+		choosepossible.cpp\
+		optimal.cpp\
+		tools.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 

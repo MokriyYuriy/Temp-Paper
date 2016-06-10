@@ -87,6 +87,26 @@ bool check_is_first(const std::vector <int> &string) {
     return false;
 }
 
+std::vector <int> initial_string(std::size_t n) {
+    std::vector <int> string(n);
+    for (std::size_t i = 0; i < n; i++) {
+        string[i] = i;
+    }
+    return string;
+}
+
+std::vector <std::vector <int>> initial_S(std::size_t n, std::size_t m) {
+    std::vector <int> string;
+    std::vector <std::vector<int>> S;
+    string = initial_string(n);
+    do {
+        S.push_back(string);
+        string = next_string(string, n, m);
+    } while(check_is_first(string));
+    return S;
+}
+
+
 std::vector <int> get_N(const std::vector <int> &query_string,
                         std::vector <std::pair <std::vector <int>, Response>> T,
                         std::size_t n, std::size_t m) {
@@ -102,8 +122,8 @@ std::vector <int> get_N(const std::vector <int> &query_string,
         }
         string = next_string(string, n, m);
     } while(check_is_first(string));
-    for (std::size_t i = 0; i < n; i++) {
-        for (std::size_t j = 0; i + j < n; j++) {
+    for (std::size_t i = 0; i <= n; i++) {
+        for (std::size_t j = 0; i + j <= n; j++) {
             N.push_back(0);
             std::pair <std::vector <int>, Response> query = {query_string, Response(i, j)}; 
             for (std::size_t z = 0; z < possible_strings.size(); z++) {
@@ -114,4 +134,38 @@ std::vector <int> get_N(const std::vector <int> &query_string,
         }
     }
     return N;
+}
+
+
+
+std::vector <std::vector <std::vector <int>>> get_new_S(const std::vector <int> &query_string,
+                        const std::vector <std::vector <int>> &S,
+                        std::vector <std::pair <std::vector <int>, Response>> T,
+                        std::size_t n, std::size_t m) {
+    std::vector <int> string(n);
+    std::vector<std::vector<std::vector<int>>> N;
+    for (std::size_t i = 0; i < n; i++) {
+        string[i] = i;
+    }
+    for (std::size_t i = 0; i <= n; i++) {
+        for (std::size_t j = 0; i + j <= n; j++) {
+            N.push_back(std::vector <std::vector <int>> ());
+            std::pair <std::vector <int>, Response> query = {query_string, Response(i, j)}; 
+            for (std::size_t z = 0; z < S.size(); z++) {
+                if (query_satisfaction(S[z], query, n, m)) {
+                    N.back().push_back(S[z]);
+                }
+            }
+        }
+    }
+    return N;
+}
+
+
+int A(int n, int m) {
+    int result = 1;
+    for (int i = m - n + 1; i <= m; i++) {
+        result *= i;
+    }
+    return result;
 }
